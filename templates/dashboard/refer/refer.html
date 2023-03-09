@@ -1,0 +1,83 @@
+{% extends 'dashboard/base/baseana.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Deposit
+{% endblock %}
+
+
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="row">
+					<div class="col">
+						<h6 class="mb-0 text-uppercase">Your Referral Area</h6>
+						<hr/>
+						<div class="card">
+							<div class="card-body">
+								<div class="p-4 border rounded">
+
+                                        <div class="col-md-6">
+
+                                            <div class="box-head">
+                            <h5><img class="gallery-img"
+                                     style="height: 50px;width: 50px;font-size: 44px!important;"
+                                     src="{% static 'dashboard/assets/images/avatars/ethereum.png' %}" alt="symbol image" title="symbol image">
+                            Share Your Refer Link</h5><br>
+
+                            <h5 class="title" style="font-size: 15px"><a href="https://cryptoethbot.com/signup/{{ request.user.username }}"><p id="myText">https://cryptoethbot.com/signup/{{ request.user.username }}
+                            </p></a> </h5>
+                            <button onclick="copyContent()" class="btn-success">Copy Link</button><br>
+                                                 <script>
+                              let text = document.getElementById('myText').innerHTML;
+                              const copyContent = async () => {
+
+                                try {
+                                  await navigator.clipboard.writeText(text);
+                                  console.log('Content copied to clipboard');
+                                  alert("Affiliate Link Copied!");
+
+                                } catch (err) {
+                                  console.error('Failed to copy: ', err);
+                                }
+                              }
+                            </script>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+		<!--end page wrapper -->
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  'use strict'
+
+			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  var forms = document.querySelectorAll('.needs-validation')
+
+			  // Loop over them and prevent submission
+			  Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+				  form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+					  event.preventDefault()
+					  event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				  }, false)
+				})
+			})()
+	</script>
+	<!--app JS-->
+{% endblock %}

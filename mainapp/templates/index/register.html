@@ -1,0 +1,101 @@
+{% extends 'index/base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+        Sign Up
+{% endblock %}
+
+{% block content %}
+
+  <div class="cs-height_90 cs-height_lg_80"></div>
+  <!-- Start Page Head -->
+  <section class="cs-page_head cs-bg" data-src="assets/img/page_head_bg.svg">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="cs-page_title">Sign Up</h1>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active">Sign Up</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <!-- End Page Head -->
+  
+  <div class="cs-height_100 cs-height_lg_70"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-md-8 offset-xl-3 offset-md-2">
+        <form class="cs-form_card cs-style1 cs-box_shadow cs-white_bg" method="post" action="">
+            {% csrf_token %}
+
+            {% if messages %}
+            <ul class="alert alert-danger" style="list-style: none;">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    <p style="color: red">{{ message }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+          <div class="cs-form_card_in">
+            <h2 class="cs-form_title text-center">Create Account</h2>
+
+            <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_field_wrap">
+                {{ form.first_name|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.first_name.errors }}</strong>
+            </div>
+
+              <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_field_wrap">
+                {{ form.last_name|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.last_name.errors }}</strong>
+            </div>
+
+              <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_field_wrap">
+                {{ form.username|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.username.errors }}</strong>
+            </div>
+
+            <div class="cs-height_20 cs-height_lg_20"></div>
+            <div class="cs-form_field_wrap">
+              {{ form.email|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.email.errors }}</strong>
+            </div>
+
+            <div class="cs-height_20 cs-height_lg_20"></div>
+            <div class="cs-form_field_wrap">
+                {{ form.password1|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.password1.errors }}</strong>
+            </div>
+
+              <div class="cs-height_20 cs-height_lg_20"></div>
+            <div class="cs-form_field_wrap">
+                {{ form.password2|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.password2.errors }}</strong>
+            </div>
+
+            <div class="cs-height_20 cs-height_lg_20"></div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="notify">
+              <label class="form-check-label" for="notify">I'm attracted in receiving marketing emails for updates on upcoming promotions, events and new features</label>
+            </div>
+            <div class="cs-height_10 cs-height_lg_10"></div>
+
+            <div class="cs-height_20 cs-height_lg_20"></div>
+            <button class="cs-btn cs-style1 cs-btn_lg w-100">
+              <span>Register Now</span>
+            </button>
+            <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_footer text-center">Have an account? <a href="/signin/">Log In</a></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="cs-height_100 cs-height_lg_70"></div>
+{% endblock %}

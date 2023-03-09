@@ -1,0 +1,104 @@
+{% extends 'dashboard/base/baseana.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Withdrawal Info
+{% endblock %}
+
+
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="row">
+					<div class="col">
+						<h6 class="mb-0 text-uppercase">Your ETH Address</h6>
+						<hr/>
+						<div class="card">
+							<div class="card-body">
+								<div class="p-4 border rounded">
+									<form class="row g-3 needs-validation" method="post" action="" novalidate>
+                                        {% csrf_token %}.
+
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                {% if 'success' == message.tags %}
+                                                    <ul class="alert alert-success" style="list-style: none;">
+                                                    <li><strong style="color: #23de06">{{ message }}</strong></li>
+                                                    </ul>
+
+                                                    {% elif 'error' == message.tags %}
+                                                    <ul class="alert alert-danger" style="list-style: none;">
+                                                    <li><strong style="color: #de063f">{{ message }}</strong></li>
+                                                    </ul>
+
+                                                {% endif %}
+                                            {% endfor %}
+                                         {% endif %}
+
+                                    <div class="col-md-6">
+                                            <label for="validationCustom03" class="form-label">MT4/MT5 ID</label>
+                                                        {{ form.mt4_5|add_class:'form-control' }}
+                                            <span style="color: red">{{ form.mt4_5.errors }}</span>
+{#                                        <span class="btn-outline-success">N.B: Withdraw Fee 0.0013 ETH</span>#}
+                                            <div class="invalid-feedback">Enter a valid Mt4/Mt5 id.
+                                                Ex. 45645124 </div>
+                                        </div>
+
+                                    <div class="col-md-6">
+                                            <label for="validationCustom03" class="form-label">MT4/MT5 Password</label>
+                                                        {{ form.password|add_class:'form-control' }}
+                                            <span style="color: red">{{ form.password.errors }}</span>
+                                            <div class="invalid-feedback">Enter a valid Mt4/Mt5 password.</div>
+                                        </div>
+
+                                     <div class="col-md-6">
+                                            <label for="validationCustom03" class="form-label">MT4/MT5 Server</label>
+                                                        {{ form.server|add_class:'form-control' }}
+                                            <span style="color: red">{{ form.server.errors }}</span>
+                                            <div class="invalid-feedback">Enter a valid Mt4/Mt5 Server.</div>
+                                        </div>
+
+
+
+										<div class="col-12">
+											<button class="btn btn-primary" type="submit">Connect to BOT</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+		<!--end page wrapper -->
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  'use strict'
+
+			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  var forms = document.querySelectorAll('.needs-validation')
+
+			  // Loop over them and prevent submission
+			  Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+				  form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+					  event.preventDefault()
+					  event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				  }, false)
+				})
+			})()
+	</script>
+	<!--app JS-->
+{% endblock %}

@@ -1,0 +1,211 @@
+{% extends 'dashboard/base/baseana.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Deposit
+{% endblock %}
+
+
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="row">
+					<div class="col">
+						<h6 class="mb-0 text-uppercase">Your Deposit Area</h6>
+						<hr/>
+						<div class="card">
+							<div class="card-body">
+								<div class="p-4 border rounded">
+									<form class="row g-3 needs-validation" method="post" action="" novalidate>
+                                        {% csrf_token %}
+                                        <div class="col-md-6">
+
+                                            <div class="box-head">
+                                                <h2><img class="gallery-img"
+                                                         style="height: 50px;width: 70px;font-size: 44px!important;"
+                                                         src="{{ MEDIA_URL }}{{ object.logo.url }}" alt="symbol image" title="symbol image">
+                                                {{ object.currency_name }}</h2><br>
+
+                                                <h5 class="title" style="font-size: 15px" id="myText">0x2f8c9ee1e28bbe3c022db852d42a3f3113cc9b11</h5>
+
+                                                <button onclick="copyContent()" class="btn-success">Copy Address</button><br>
+                                                 <script>
+                                                      let text = document.getElementById('myText').innerHTML;
+                                                      const copyContent = async () => {
+
+                                                        try {
+                                                          await navigator.clipboard.writeText(text);
+                                                          console.log('Content copied to clipboard');
+                                                          alert("Deposit Address Copied!");
+
+                                                        } catch (err) {
+                                                          console.error('Failed to copy: ', err);
+                                                        }
+                                                      }
+                                                 </script>
+                                                <br>
+                                                <img class="gallery-img" src="{% static 'dashboard/assets/images/avatars/eth.png' %}" alt="symbol image" title="symbol image">
+                                                <br>
+                                                <br>
+
+                                                {% if messages %}
+                                                    {% for message in messages %}
+                                                        {% if 'success' == message.tags %}
+                                                            <ul class="alert alert-success" style="list-style: none;">
+                                                            <li><strong style="color: #23de06">{{ message }}</strong></li>
+                                                            </ul>
+
+                                                            {% elif 'error' == message.tags %}
+                                                            <ul class="alert alert-danger" style="list-style: none;">
+                                                            <li><strong style="color: #de063f">{{ message }}</strong><br> <strong style="color: #0bb7ff">Please, <a href="/coin-list/">Deposit Funds.</a> </strong></li>
+                                                            </ul>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                                <label for="validationCustom03" class="form-label">Selected Currency</label>
+                                                            {{ form.payment_method|add_class:'form-control' }}
+                                                <span style="color: red">{{ form.payment_method.errors }}</span>
+                                                <div class="invalid-feedback">Ensure that you selected a valid currency!</div><br>
+
+
+                                            <label for="validationCustom03" class="form-label">Amount Deposited</label>
+                                            {% render_field form.amount_deposited type="text" class="numbers form-control" id="amount1" %}
+
+                                                <span style="color: red">{{ form.amount_deposited.errors }}</span>
+                                            <strong id="convert"></strong>
+                                                <div class="invalid-feedback">Ensure that there are no more than 5 decimal places.
+                                                    Ex. 0.12345</div>
+
+                                            <span style="color: green;font-size: 13px;">$</span>{% render_field form.in_usd|append_attr:"readonly:readonly" type="text" name="totalval" style="border-style: None;color: green;font-size: 13px;margin-top: .25rem;" id="totalval" %}
+
+
+
+                                            <input type="text" name="amount-rupees" id="amount-rupees"
+                                                   style="border-style: None;width: 270px;color: green;font-size: 10px;margin-top: -0.75rem;" readonly />
+                                </div>
+
+
+                                            {% if 'name' == 'name' %}
+                                            <div class="col-md-6">
+                                                <label for="validationCustom03" class="form-label">Transaction ID</label>
+{#                                                            {{ form.transaction_id|add_class:'form-control' }}#}
+                                                {% render_field form.transaction_id type="text" class="form-control" id="transid" %}
+                                                <span style="color: red">{{ form.transaction_id.errors }}</span>
+                                                <div class="invalid-feedback">Please provide your valid transaction ID</div>
+                                            </div>
+                                            {% endif %}
+                                        <br>
+
+                                            <div class="col-12">
+                                                <button class="btn btn-primary" type="submit">Deposit</button>
+                                            </div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+		<!--end page wrapper -->
+
+    <!-- auto convert to currency -->
+    <!-- auto convert to currency -->
+    <!-- auto convert to currency -->
+    <!-- auto convert to currency -->
+
+
+<script src="{% static 'deposit/js/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'deposit/js/num-to-words.js' %}" type="text/javascript"></script>
+<script>
+//Enter Only Numbers
+$("numbers").keypress(function (event) {
+    var inputCode = event.which;
+    var currentValue = $(this).val();
+    if (inputCode > 0 && (inputCode < 48 || inputCode > 57)) {
+        if (inputCode == 46) {
+            if (getCursorPosition(this) == 0 && currentValue.charAt(0) == '-') return false;
+            if (currentValue.match(/[.]/)) return false;
+        }
+        else if (inputCode == 45) {
+            if (currentValue.charAt(0) == '-') return false;
+            if (getCursorPosition(this) != 0) return false;
+        }
+        else if (inputCode == 8) return true;
+        else return false;
+
+    }
+    else if (inputCode > 0 && (inputCode >= 48 && inputCode <= 57)) {
+        if (currentValue.charAt(0) == '-' && getCursorPosition(this) == 0) return false;
+    }
+});
+function getCursorPosition(element) {
+    if (element.selectionStart) return element.selectionStart;
+    else if (document.selection)
+    {
+        element.focus();
+        var r = document.selection.createRange();
+        if (r == null) return 0;
+
+        var re = element.createTextRange(),
+            rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint('EndToStart', re);
+        return rc.text.length;
+    }
+    return 0;
+}
+
+
+var words="";
+$(function() {
+    $("#amount1, #amount2").on("keydown keyup", per);
+	function per() {
+		var totalamount = (
+		Number($("#amount1").val()) * {{ currency_value }}
+		);
+
+		$("#totalval").val(totalamount.toFixed(2));
+		words = toWords(totalamount.toFixed(2));
+		$("#amount-rupees").val(words + "Dollar Only");
+	}
+});
+</script>
+
+
+    <!-- auto convert to currency -->
+    <!-- auto convert to currency -->
+    <!-- auto convert to currency -->
+
+	<script>
+    // auto convert to currency
+
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  'use strict'
+
+			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  var forms = document.querySelectorAll('.needs-validation')
+
+			  // Loop over them and prevent submission
+			  Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+				  form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+					  event.preventDefault()
+					  event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				  }, false)
+				})
+			})()
+	</script>
+	<!--app JS-->
+{% endblock %}

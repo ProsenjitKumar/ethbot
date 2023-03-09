@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hi, {{ last_name }} {{ first_name }},
+Your withdrawal request {{ submit_amount }} ETH has been successfully done!
+Shortly {{ submit_amount }} ETH should be reflected in your wallet.
+Your wallet ETH is {{ eth_address }}.
+Subscribed by {{ email }}
+
+Sincerely,
+The Ethereum Bot Team
+
+{% endautoescape %}

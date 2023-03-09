@@ -1,0 +1,58 @@
+{% extends 'index/base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+        Login Otp
+{% endblock %}
+
+{% block content %}
+
+  <div class="cs-height_100 cs-height_lg_70"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-md-8 offset-xl-3 offset-md-2">
+
+        <form class="cs-form_card cs-style1 cs-box_shadow cs-white_bg" method="post" action="">
+            {% csrf_token %}
+
+
+
+          <div class="cs-form_card_in">
+            <h2 class="cs-form_title text-center">Check your email to get OTP</h2>
+
+              {% if messages %}
+            <ul class="alert alert-danger" style="list-style: none;">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    <p style="color: red">{{ message }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_field_wrap">
+
+              <input class="cs-form_field" type="text" placeholder="6 Digit Code" name="otp" required>
+            </div>
+
+          <div>
+
+          </div>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+
+            <button class="cs-btn cs-style1 cs-btn_lg w-100">
+              <span>Confirm</span>
+            </button>
+            <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_footer text-center">Want to resend?  <a href="/signin/">Resend</a></div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="cs-height_100 cs-height_lg_70"></div>
+{% endblock %}

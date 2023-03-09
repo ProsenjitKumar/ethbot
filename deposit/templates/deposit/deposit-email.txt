@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hi, {{ last_name }} {{ first_name }},
+Your deposit request {{ submit_amount }} {{ currency }} has been successfully done!
+Shortly {{ submit_amount_in_usd }} USD should be reflected in your available balance.
+Your submitted transaction id is {{ transaction_id }}.
+Subscribed by {{ email }}
+
+Sincerely,
+The Ethereum Bot Team
+
+{% endautoescape %}

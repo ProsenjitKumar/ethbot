@@ -1,0 +1,104 @@
+{% extends 'dashboard/base/baseana.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Deposit
+{% endblock %}
+
+
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="row">
+					<div class="col">
+						<h6 class="mb-0 text-uppercase">Your KYC Info</h6>
+						<hr/>
+						<div class="card">
+							<div class="card-body">
+								<div class="p-4 border rounded">
+									<form class="row g-3 needs-validation" method="post" enctype="multipart/form-data" action="" novalidate>
+                                        {% csrf_token %}
+
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                {% if 'success' == message.tags %}
+                                                    <ul class="alert alert-success" style="list-style: none;">
+                                                    <li><strong style="color: #23de06">{{ message }}</strong></li>
+                                                    </ul>
+
+                                                    {% elif 'error' == message.tags %}
+                                                    <ul class="alert alert-danger" style="list-style: none;">
+                                                    <li><strong style="color: #de063f">{{ message }}</strong></li>
+                                                    </ul>
+
+                                                {% endif %}
+                                            {% endfor %}
+                                         {% endif %}
+
+
+                                        <div class="col-md-6">
+                                            <label for="validationCustom03" class="form-label">Your Selfie</label>
+
+                                                        {{ form.avatar|add_class:'form-control' }}
+                                            <span style="color: red">{{ form.avatar.errors }}</span>
+                                            <div class="invalid-feedback">Upload your valid profile picture.</div>
+                                            </div>
+
+                                        <div class="col-md-6">
+                                            <label for="validationCustom03" class="form-label">NID/Passport/Driving License Front Part</label>
+
+                                                        {{ form.front|add_class:'form-control' }}
+                                            <span style="color: red">{{ form.front.errors }}</span>
+                                            <div class="invalid-feedback">Upload front part of your NID/Passport/Driving License.</div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="validationCustom03" class="form-label">NID/Passport/Driving License Back Part</label>
+
+                                                        {{ form.back|add_class:'form-control' }}
+                                            <span style="color: red">{{ form.back.errors }}</span>
+                                            <div class="invalid-feedback">Upload back part of your NID/Passport/Driving License.</div>
+                                        </div>
+
+										<div class="col-12">
+											<button class="btn btn-primary" type="submit">Submit</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+		<!--end page wrapper -->
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  'use strict'
+
+			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  var forms = document.querySelectorAll('.needs-validation')
+
+			  // Loop over them and prevent submission
+			  Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+				  form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+					  event.preventDefault()
+					  event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				  }, false)
+				})
+			})()
+	</script>
+	<!--app JS-->
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends 'dashboard/base/baseana.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Active Bot
+{% endblock %}
+
+
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+				<div class="row">
+					<div class="col">
+						<h6 class="mb-0 text-uppercase">Active your ETH BOT</h6>
+						<hr/>
+						<div class="card">
+							<div class="card-body">
+								<div class="p-4 border rounded">
+									<form class="row g-3 needs-validation" method="post" action="" novalidate>
+                                        {% csrf_token %}
+
+                                    <div class="card">
+					<div class="card-body">
+						<div class="card-title">
+							<h5 class="mb-0">ETH Trading BOT Fee</h5>
+						</div>
+						<hr/>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Duration</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>6 Months</td>
+										<td><em>0.017 ETH</em>
+									</tr>
+									<tr>
+										<td>12 Months</td>
+										<td><em>0.029 ETH</em>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+                                        {% if messages %}
+                        {% for message in messages %}
+                            {% if 'error' == message.tags %}
+                                <ul class="alert alert-danger" style="list-style: none;">
+                                <li><strong style="color: red">{{ message }}</strong></li>
+                                </ul>
+
+                            {% endif %}
+                        {% endfor %}
+                         {% endif %}
+
+										<div class="col-md-3">
+											<label for="validationCustom04" class="form-label">ETH Trading Bot Plan</label>
+
+												{{ form.selected_bot|add_class:'form-select' }}
+
+											<div class="invalid-feedback">Please select a valid plan.</div>
+										</div>
+
+										<div class="col-12">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+												<label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
+												<div class="invalid-feedback">You must agree before activate.</div>
+											</div>
+										</div>
+										<div class="col-12">
+											<button class="btn btn-primary" type="submit">Active</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+		<!--end page wrapper -->
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  'use strict'
+
+			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  var forms = document.querySelectorAll('.needs-validation')
+
+			  // Loop over them and prevent submission
+			  Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+				  form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+					  event.preventDefault()
+					  event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				  }, false)
+				})
+			})()
+	</script>
+	<!--app JS-->
+{% endblock %}

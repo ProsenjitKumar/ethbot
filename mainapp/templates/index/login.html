@@ -1,0 +1,87 @@
+{% extends 'index/base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+        Signin
+{% endblock %}
+
+{% block content %}
+  <div class="cs-height_90 cs-height_lg_80"></div>
+  <!-- Start Page Head -->
+  <section class="cs-page_head cs-bg" data-src="assets/img/page_head_bg.svg">
+    <div class="container">
+      <div class="text-center">
+        <h1 class="cs-page_title">Login</h1>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active">Login</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+  <!-- End Page Head -->
+  
+  <div class="cs-height_100 cs-height_lg_70"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-md-8 offset-xl-3 offset-md-2">
+
+        <form class="cs-form_card cs-style1 cs-box_shadow cs-white_bg" method="post" action="">
+            {% csrf_token %}
+
+
+
+          <div class="cs-form_card_in">
+            <h2 class="cs-form_title text-center">ETH BOT Login</h2>
+
+              {% if messages %}
+                {% for message in messages %}
+                    {% if 'success' == message.tags %}
+                        <ul class="alert alert-success" style="list-style: none;">
+                        <li><strong style="color: #23de06">{{ message }}</strong></li>
+                        </ul>
+
+                        {% elif 'error' == message.tags %}
+                        <ul class="alert alert-danger" style="list-style: none;">
+                        <li><strong style="color: #de063f">{{ message }}</strong></li>
+                        </ul>
+
+                    {% endif %}
+                {% endfor %}
+             {% endif %}
+
+
+            <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_field_wrap">
+                {{ form.username|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.username.errors }}</strong>
+            </div>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+            <div class="cs-form_field_wrap">
+
+                {{ form.password|add_class:'cs-form_field' }}
+                <strong style="color: red">{{ form.password.errors }}</strong>
+            </div>
+            <div class="cs-height_20 cs-height_lg_20"></div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="notify">
+              <label class="form-check-label" for="notify">Remember Me</label>
+            </div>
+            <div class="cs-height_15 cs-height_lg_15"></div>
+            <button class="cs-btn cs-style1 cs-btn_lg w-100">
+              <span>Login</span>
+            </button>
+            <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_footer text-center">Forgot Password?  <a href="/password_reset/">Reset Now</a></div>
+          <div class="cs-height_30 cs-height_lg_30"></div>
+            <div class="cs-form_footer text-center">No Account?  <a href="/signup/nuli/">Register Now</a></div>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="cs-height_100 cs-height_lg_70"></div>
+{% endblock %}

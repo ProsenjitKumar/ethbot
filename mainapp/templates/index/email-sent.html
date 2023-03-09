@@ -1,0 +1,25 @@
+{% extends 'index/base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+        Signin
+{% endblock %}
+
+{% block content %}
+  <div class="cs-height_90 cs-height_lg_80"></div>
+  
+  <div class="cs-height_100 cs-height_lg_70"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-md-8 offset-xl-3 offset-md-2">
+
+        <h2 class="cs-form_title text-center">Confirmation link sent to this <span style="font-size: 22px;color: #0dcaf0">
+            <a href="mailto:someone@example.com">({{ email_submitted }})</a></span> email.</h2>
+        <h2 class="cs-form_title text-center">Please check your email inbox and confirm.</h2>
+
+      </div>
+    </div>
+  </div>
+  <div class="cs-height_100 cs-height_lg_70"></div>
+{% endblock %}

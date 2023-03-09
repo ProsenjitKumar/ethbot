@@ -1,0 +1,77 @@
+{% extends 'dashboard/base/baseana.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Deposit History
+{% endblock %}
+
+
+{% block content %}
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+
+
+						<h6 class="mb-0 text-uppercase">Your Deposit History</h6>
+						<hr/>
+
+                                        <div class="card-body">
+                                            <div class="card-title">
+                                                <h5 class="mb-0">Deposit History</h5>
+                                            </div>
+                                            <hr/>
+                                            <div class="table-responsive">
+
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Amount Deposited</th>
+                                                            <th>Transaction ID</th>
+                                                            <th>Date(UTC Time)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    {% for object in object_list %}
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{{ object.amount_deposited }}</td>
+                                                            <td><em>{{ object.transaction_id }}</em>
+                                                            <td><em>{{ object.created_at }}</em>
+                                                        </tr>
+
+                                                    </tbody>
+                                                    {% endfor %}
+                                                </table>
+
+                                            </div>
+                                        </div>
+
+
+			</div>
+		</div>
+		<!--end page wrapper -->
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+			(function () {
+			  'use strict'
+
+			  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+			  var forms = document.querySelectorAll('.needs-validation')
+
+			  // Loop over them and prevent submission
+			  Array.prototype.slice.call(forms)
+				.forEach(function (form) {
+				  form.addEventListener('submit', function (event) {
+					if (!form.checkValidity()) {
+					  event.preventDefault()
+					  event.stopPropagation()
+					}
+
+					form.classList.add('was-validated')
+				  }, false)
+				})
+			})()
+	</script>
+	<!--app JS-->
+{% endblock %}
